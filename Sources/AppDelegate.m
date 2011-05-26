@@ -101,6 +101,8 @@
 }
 
 - (void)networkTask1 {
+	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	//[[UIApplication sharedApplication] showNetworkActivityIndicator];
 	
@@ -108,6 +110,8 @@
 	
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	//[[UIApplication sharedApplication] hideNetworkActivityIndicator];
+	
+	[pool drain];
 }
 
 - (void)startNetworkTask2 {
@@ -115,6 +119,8 @@
 }
 
 - (void)networkTask2 {
+	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	//[[UIApplication sharedApplication] showNetworkActivityIndicator];
 	
@@ -123,6 +129,8 @@
 	Log(@"networkActivityIndicatorVisible=%d",[UIApplication sharedApplication].networkActivityIndicatorVisible);
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	//[[UIApplication sharedApplication] hideNetworkActivityIndicator];
+	
+	[pool drain];	
 }
 
 

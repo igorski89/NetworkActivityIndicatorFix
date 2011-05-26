@@ -12,7 +12,7 @@
 @implementation UIApplication (NetworkActivityIndicator)
 
 + (void)load {
-	Log(@"exchange methods implementations");
+	//Log(@"exchange methods implementations");
     Method originalMethod = class_getInstanceMethod([self class], @selector(setNetworkActivityIndicatorVisible:));
     Method fixedMethod = class_getInstanceMethod([self class], @selector(fixedSetActivityIndicatorVisible:));
     method_exchangeImplementations(originalMethod, fixedMethod);
