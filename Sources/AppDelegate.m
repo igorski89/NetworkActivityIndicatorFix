@@ -101,11 +101,13 @@
 }
 
 - (void)networkTask1 {
-	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+	//[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+	[[UIApplication sharedApplication] showNetworkActivityIndicator];
 	
 	[NSThread sleepForTimeInterval:3];
 	
-	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+	//[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+	[[UIApplication sharedApplication] hideNetworkActivityIndicator];
 }
 
 - (void)startNetworkTask2 {
@@ -113,12 +115,14 @@
 }
 
 - (void)networkTask2 {
-	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+	//[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+	[[UIApplication sharedApplication] showNetworkActivityIndicator];
 	
 	[NSThread sleepForTimeInterval:5];
 	
 	Log(@"networkActivityIndicatorVisible=%d",[UIApplication sharedApplication].networkActivityIndicatorVisible);
-	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+	//[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+	[[UIApplication sharedApplication] hideNetworkActivityIndicator];
 }
 
 
