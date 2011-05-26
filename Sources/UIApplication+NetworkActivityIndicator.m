@@ -7,29 +7,36 @@
 //
 
 #import "UIApplication+NetworkActivityIndicator.h"
+#include <objc/runtime.h>
 
 @implementation UIApplication (NetworkActivityIndicator)
 
-static int networkActivityCount = 0;
-- (void)showNetworkActivityIndicator {
-	//just redirect all calls to main thread
-	if (![NSThread isMainThread]) {
-		[self performSelectorOnMainThread:@selector(showNetworkActivityIndicator) withObject:nil waitUntilDone:NO];
-	}
-	
-    if (!networkActivityCount)
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    networkActivityCount++;
++ (void)load {
+	Log(@"exchange methods implementations");
+    Method originalMethod = class_getInstanceMethod([self class], @selector(setNetworkActivityIndicatorVisible:));
+    Method fixedMethod = class_getInstanceMethod([self class], @selector(fixedSetActivityIndicatorVisible:));
+    method_exchangeImplementations(originalMethod, fixedMethod);
 }
-- (void)hideNetworkActivityIndicator {
-	//just redirect all calls to main thread
-	if (![NSThread isMainThread]) {
-		[self performSelectorOnMainThread:@selector(hideNetworkActivityIndicator) withObject:nil waitUntilDone:NO];
+
+- (void)fixedSetActivityIndicatorVisible:(BOOL)visible {
+	Log(@"visible=%d",visible);
+	static NSInteger networkActivityCount = 0;
+	@synchronized(self) {
+		if (visible) {
+			if (!networkActivityCount) {
+				[[UIApplication sharedApplication] fixedSetActivityIndicatorVisible:YES];
+			}
+			
+			networkActivityCount++;
+		}
+		else {
+			networkActivityCount = MAX(networkActivityCount - 1, 0);
+			
+			if (!networkActivityCount) {
+				[[UIApplication sharedApplication] fixedSetActivityIndicatorVisible:NO];
+			}
+		}
 	}
-	
-    networkActivityCount = MAX(networkActivityCount - 1, 0);
-    if (!networkActivityCount)
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
 @end

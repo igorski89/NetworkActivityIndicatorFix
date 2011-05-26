@@ -11,7 +11,6 @@
 
 @interface UIApplication (NetworkActivityIndicator)
 
-- (void)showNetworkActivityIndicator;
-- (void)hideNetworkActivityIndicator;
+- (void)fixedSetActivityIndicatorVisible:(BOOL)visible;
 
 @end
