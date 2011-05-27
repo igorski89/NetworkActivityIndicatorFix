@@ -1,0 +1,3 @@
+![iOS network activity indicator](http://posterous.com/getfile/files.posterous.com/temp-2011-05-25/BFqrhctbemAmlyDDlhAFynetcqCdxaFAspIalasnGyCeFgAbBcgDjptsffuA/Screen_shot_2011-05-26_at_3.08.17_AM.png "iOS network activity indicator")
+
+solution to correct handle displaying network activity indicator on iOS. Read more on [my blog post](http://evsukov.posterous.com/fixing-ios-network-activity-indicator )
